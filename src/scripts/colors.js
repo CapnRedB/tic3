@@ -19,85 +19,52 @@
 
 
 
+ERNO.Color = function(name, initial, hex, styleF, styleB) {
 
-
-
-
-
-
-ERNO.Color = function( name, initial, hex, styleF, styleB ){
-
-	this.name    = name;
+	this.name = name;
 	this.initial = initial;
-	this.hex     = hex;
-	this.styleF  = styleF;
-	this.styleB  = styleB;
+	this.hex = hex;
+	this.styleF = styleF;
+	this.styleB = styleB;
 }
 
 
 //  Global constants to describe sticker colors.
 
-var W,
-	O,
+var M,
+	J,
 	B,
-	R,
-	G,
-	Y,
 	COLOURLESS;
 
-W = ERNO.WHITE = new ERNO.Color(
+M = ERNO.MADISON = new ERNO.Color(
 
-	'white',
-	'W',
-	'#FFF',
-	'font-weight: bold; color: #888',
-	'background-color: #F3F3F3; color: rgba( 0, 0, 0, 0.5 )'
-),
-O = ERNO.ORANGE = new ERNO.Color(
+		'madison',
+		'M',
+		'#0A2463',
+		'font-weight: bold; color: #0A2463',
+		'background-color: #0A2463; color: rgba( 10, 36, 99, 0.5 )'
+	),
+	J = ERNO.JEWEL = new ERNO.Color(
 
-	'orange',
-	'O',
-	'#F60',
-	'font-weight: bold; color: #F60',
-	'background-color: #F60; color: rgba( 255, 255, 255, 0.9 )'
-),
-B = ERNO.BLUE = new ERNO.Color(
+		'jewel',
+		'J',
+		'#138A36',
+		'font-weight: bold; color: #138A36',
+		'background-color: #138A36; color: rgba( 255, 255, 255, 0.9 )' //text color?
+	),
+	B = ERNO.BLUSH = new ERNO.Color(
 
-	'blue',
-	'B',
-	'#00D',
-	'font-weight: bold; color: #00D',
-	'background-color: #00D; color: rgba( 255, 255, 255, 0.9 )'
-),
-R = ERNO.RED = new ERNO.Color(
+		'blush',
+		'B',
+		'#B33F62',
+		'font-weight: bold; color: #B33F62',
+		'background-color: #B33F62; color: rgba( 255, 255, 255, 0.9 )'
+	),
+	ERNO.COLORLESS = new ERNO.Color(
 
-	'red',
-	'R',
-	'#F00',
-	'font-weight: bold; color: #F00',
-	'background-color: #F00; color: rgba( 255, 255, 255, 0.9 )'
-),
-G = ERNO.GREEN = new ERNO.Color(
-
-	'green',
-	'G',
-	'#0A0',
-	'font-weight: bold; color: #0A0',
-	'background-color: #0A0; color: rgba( 255, 255, 255, 0.9 )'
-),
-Y = ERNO.YELLOW = new ERNO.Color(
-
-	'yellow',
-	'Y',
-	'#FE0',
-	'font-weight: bold; color: #ED0',
-	'background-color: #FE0; color: rgba( 0, 0, 0, 0.5 )'
-),
-ERNO.COLORLESS = new ERNO.Color(
-
-	'NA',
-	'X',
-	'#DDD',
-	'color: #EEE',
-	'color: #DDD'
-)
+		'NA',
+		'X',
+		'#DDD',
+		'color: #EEE',
+		'color: #DDD'
+	)

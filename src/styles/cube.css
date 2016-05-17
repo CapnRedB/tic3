@@ -199,12 +199,9 @@ text-align: center;
 
 }
 
-.cube .sticker.white 	{ background: #0A2463;  }
-.cube .sticker.orange 	{ background: #0A2463; 	}
-.cube .sticker.blue 	{ background: #138A36; 	}
-.cube .sticker.red 		{ background: #138A36;	}
-.cube .sticker.green 	{ background: #B33F62;	}
-.cube .sticker.yellow 	{ background: #B33F62; 	}
+.cube .sticker.madison 	{ background: #0A2463;  }
+.cube .sticker.jewel 	{ background: #138A36; 	}
+.cube .sticker.blush 	{ background: #B33F62;	}
 
 .cube .sticker.stickerLogo {
 
@@ -245,7 +242,7 @@ border-bottom: 1px solid #000;
 }
 /*
 
-We want ID numbers displayed on introverted faces to be white,
+We want ID numbers displayed on introverted faces to be madison,
 but why use #FEFEFE instead of #FFF?
 So we can export as PDF, open up in Adobe Illustrator, select "Same Fill Color"
 and it will exclude our #FFF text nodes!

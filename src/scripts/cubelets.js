@@ -20,7 +20,7 @@
                Down
                 3
 
-	
+
 	The faces[] Array is mapped to names for convenience:
 
 	  this.faces[ 0 ] === this.front
@@ -29,11 +29,11 @@
 	  this.faces[ 3 ] === this.down
 	  this.faces[ 4 ] === this.left
 	  this.faces[ 5 ] === this.back
-	
-	
+
+
 	Each Cubelet has an Index which is assigned during Cube creation
 	and an Address which changes as the Cubelet changes location.
-	Additionally an AddressX, AddressY, and AddressZ are calculated 
+	Additionally an AddressX, AddressY, and AddressZ are calculated
 	from the Address and represent the Cubelet's location relative
 	to the Cube's core with integer values ranging from -1 to +1.
 	For an overview of the Cubelet's data from the browser's console:
@@ -51,22 +51,17 @@
 
 
 
+ERNO.Cubelet = function(cube, id, colors) {
 
 
-
-
-
-ERNO.Cubelet = function( cube, id, colors ){
-
-
-	THREE.Object3D.call( this );
+	THREE.Object3D.call(this);
 
 
 	//  Our Cube can directly address its Cubelet children,
 	//  only fair the Cubelet can address their parent Cube!
 
 	this.cube = cube;
-	
+
 
 	//  Our Cubelet's ID is its unique number on the Cube.
 	//  Each Cube has Cubletes numbered 0 through 26.
@@ -82,15 +77,15 @@ ERNO.Cubelet = function( cube, id, colors ){
 	//  This method will also set the X, Y, and Z components of the
 	//  Cubelet's address on the Cube.
 
-	this.setAddress( this.id );
+	this.setAddress(this.id);
 
 
 	//  We're going to build Cubelets that are 140 pixels square.
 	//  Yup. This size is hardwired in Cube.
 	//  It is also hard-wired into the CSS, but we can't simply
-	//  grab the style.getBoundingClientRect() value because 
+	//  grab the style.getBoundingClientRect() value because
 	//  that's a 2D measurement -- doesn't account for pos and rot.
-	
+
 	this.size = cube.cubeletSize || 140;
 
 
@@ -99,18 +94,18 @@ ERNO.Cubelet = function( cube, id, colors ){
 	//  there's no need to attach these properties to our Cubelet object.
 
 	var epsilon = 0.1,
-	x = this.addressX * ( this.size + epsilon ),
-	y = this.addressY * ( this.size + epsilon ),
-	z = this.addressZ * ( this.size + epsilon );
-	
-	this.position.set( x, y, z );
-	this.matrixSlice = new THREE.Matrix4().makeTranslation( x, y, z );
+		x = this.addressX * (this.size + epsilon),
+		y = this.addressY * (this.size + epsilon),
+		z = this.addressZ * (this.size + epsilon);
+
+	this.position.set(x, y, z);
+	this.matrixSlice = new THREE.Matrix4().makeTranslation(x, y, z);
 	this.updateMatrix();
-	
+
 
 
 	// // Add the cublet to the cube object
-	this.cube.object3D.add( this );
+	this.cube.object3D.add(this);
 
 
 
@@ -119,10 +114,9 @@ ERNO.Cubelet = function( cube, id, colors ){
 	// domElement.classList.add( 'cubeletId-'+ this.id );
 	// this.css3DObject = new THREE.CSS3DObject( domElement );
 
-	
+
 	// this.css3DObject.name = 'css3DObject-' + this.id;
 	// this.add( this.css3DObject );
-
 
 
 
@@ -131,7 +125,7 @@ ERNO.Cubelet = function( cube, id, colors ){
 	//  Here's our overhead for that:
 
 	var extrovertedFaces = 0;
-	if( colors === undefined ) colors = [ W, O,  ,  , G, ];
+	if (colors === undefined) colors = [W, O, , , G, ];
 	this.faces = [];
 
 
@@ -140,7 +134,7 @@ ERNO.Cubelet = function( cube, id, colors ){
 	//  We need to loop through the colors[] Array "manually"
 	//  because Array.forEach() would skip the undefined entries.
 
-	for( var i = 0; i < 6; i ++ ){
+	for (var i = 0; i < 6; i++) {
 
 
 		//  Before we create our face's THREE object
@@ -148,68 +142,68 @@ ERNO.Cubelet = function( cube, id, colors ){
 		// (This is based on our above positions and rotations map.)
 
 		var
-		color  = colors[ i ] || ERNO.COLORLESS;
-		
+			color = colors[i] || ERNO.COLORLESS;
+
 
 		//  Each face is an object and keeps track of its original ID number
 		// (which is important because its address will change with each rotation)
 		//  its current color, and so on.
 
-		this.faces[ i ] = {};
-		this.faces[ i ].id = i;
-		this.faces[ i ].color = color;
-		
+		this.faces[i] = {};
+		this.faces[i].id = i;
+		this.faces[i].color = color;
+
 
 		//  We're going to keep track of what face was what at the moment of initialization,
 		//  mostly for solving purposes.
 		//  This is particularly useful for Striegel's solver
 		//  which requires an UP normal.
 
-		this.faces[ i ].normal = ERNO.Direction.getNameById( i );
+		this.faces[i].normal = ERNO.Direction.getNameById(i);
 
 
-	// 	//  FACE CONTAINER.
-	// 	//  This face of our Cubelet needs a DOM element for all the
-	// 	//  related DOM elements to be attached to.
+		// 	//  FACE CONTAINER.
+		// 	//  This face of our Cubelet needs a DOM element for all the
+		// 	//  related DOM elements to be attached to.
 
-	// 	var faceElement = document.createElement( 'div' );
-	// 	faceElement.classList.add( 'face' );
-	// 	faceElement.classList.add( 'face'+ ERNO.Direction.getNameById( i ).capitalize() );
-	// 	this.css3DObject.element.appendChild( faceElement );
-	// 	this.faces[i].element = faceElement;
-
-
-
-	// 	//  WIREFRAME.
-
-	// 	var wireframeElement = document.createElement( 'div' );
-	// 	wireframeElement.classList.add( 'wireframe' );
-	// 	faceElement.appendChild( wireframeElement );
+		// 	var faceElement = document.createElement( 'div' );
+		// 	faceElement.classList.add( 'face' );
+		// 	faceElement.classList.add( 'face'+ ERNO.Direction.getNameById( i ).capitalize() );
+		// 	this.css3DObject.element.appendChild( faceElement );
+		// 	this.faces[i].element = faceElement;
 
 
-	// 	//  CUBELET ID.
-	// 	//  For debugging we want the ability to display this Cubelet's ID number
-	// 	//  with an underline (to make numbers like 6 and 9 legible upside-down).
 
-	// 	var idElement = document.createElement( 'div' );
-	// 	idElement.classList.add( 'id' );
-	// 	faceElement.appendChild( idElement );
-		
-	// 	var underlineElement = document.createElement( 'span' );
-	// 	underlineElement.classList.add( 'underline' );
-	// 	underlineElement.innerText = this.id;
-	// 	idElement.appendChild( underlineElement );
+		// 	//  WIREFRAME.
+
+		// 	var wireframeElement = document.createElement( 'div' );
+		// 	wireframeElement.classList.add( 'wireframe' );
+		// 	faceElement.appendChild( wireframeElement );
+
+
+		// 	//  CUBELET ID.
+		// 	//  For debugging we want the ability to display this Cubelet's ID number
+		// 	//  with an underline (to make numbers like 6 and 9 legible upside-down).
+
+		// 	var idElement = document.createElement( 'div' );
+		// 	idElement.classList.add( 'id' );
+		// 	faceElement.appendChild( idElement );
+
+		// 	var underlineElement = document.createElement( 'span' );
+		// 	underlineElement.classList.add( 'underline' );
+		// 	underlineElement.innerText = this.id;
+		// 	idElement.appendChild( underlineElement );
 
 
 		//  INTROVERTED FACES.
 		//  If this face has no color sticker then it must be interior to the Cube.
 		//  That means in a normal state (no twisting happening) it is entirely hidden.
 
-	this.faces[ i ].isIntrovert = color === ERNO.COLORLESS;
+		this.faces[i].isIntrovert = color === ERNO.COLORLESS;
 
-		if( color === ERNO.COLORLESS ){
+		if (color === ERNO.COLORLESS) {
 
-	// 		faceElement.classList.add( 'faceIntroverted' );
+			// 		faceElement.classList.add( 'faceIntroverted' );
 
 		}
 
@@ -226,30 +220,30 @@ ERNO.Cubelet = function( cube, id, colors ){
 			//  to determine below what 'type' of Cubelet this is:
 			//  Core, Center, Edge, or Corner.
 
-			extrovertedFaces ++;
+			extrovertedFaces++;
 
 
-	// 		faceElement.classList.add( 'faceExtroverted' );
+			// 		faceElement.classList.add( 'faceExtroverted' );
 
 
-	// 		//  STICKER.
-	// 		//  You know, the color part that makes the Cube
-	// 		//  the most frustrating toy ever.
+			// 		//  STICKER.
+			// 		//  You know, the color part that makes the Cube
+			// 		//  the most frustrating toy ever.
 
-	// 		var stickerElement = document.createElement( 'div' );
-	// 		stickerElement.classList.add( 'sticker' );
-	// 		stickerElement.classList.add( color.name );		
-	// 		faceElement.appendChild( stickerElement );
+			// 		var stickerElement = document.createElement( 'div' );
+			// 		stickerElement.classList.add( 'sticker' );
+			// 		stickerElement.classList.add( color.name );
+			// 		faceElement.appendChild( stickerElement );
 
 
-	// 		//  TEXT.
-	// 		//  One character per face, mostly for our branding.
+			// 		//  TEXT.
+			// 		//  One character per face, mostly for our branding.
 
-	// 		var textElement = document.createElement( 'div' );
-	// 		textElement.classList.add( 'text' );
-	// 		textElement.innerText = i;
-	// 		this.faces[ i ].text = textElement;
-	// 		faceElement.appendChild( textElement );
+			// 		var textElement = document.createElement( 'div' );
+			// 		textElement.classList.add( 'text' );
+			// 		textElement.innerText = i;
+			// 		this.faces[ i ].text = textElement;
+			// 		faceElement.appendChild( textElement );
 
 		}
 	}
@@ -266,28 +260,27 @@ ERNO.Cubelet = function( cube, id, colors ){
 		'edge',
 		'corner'
 
-	][ extrovertedFaces ]
+	][extrovertedFaces]
 
 
 
 	//  Convience accessors for the Cubelet's faces.
 	//  What color is the left face? this.left() !!
 
-	this.front  	= this.faces[ 0 ]
-		this.up     = this.faces[ 1 ]
-		this.right  = this.faces[ 2 ]
-		this.down   = this.faces[ 3 ]
-		this.left   = this.faces[ 4 ]
-		this.back   = this.faces[ 5 ]
-		this.colors = 
+	this.front = this.faces[0]
+	this.up = this.faces[1]
+	this.right = this.faces[2]
+	this.down = this.faces[3]
+	this.left = this.faces[4]
+	this.back = this.faces[5]
+	this.colors =
 
-			( this.faces[ 0 ].color ? this.faces[ 0 ].color.initial : '-' ) +
-			( this.faces[ 1 ].color ? this.faces[ 1 ].color.initial : '-' ) +
-			( this.faces[ 2 ].color ? this.faces[ 2 ].color.initial : '-' ) +
-			( this.faces[ 3 ].color ? this.faces[ 3 ].color.initial : '-' ) +
-			( this.faces[ 4 ].color ? this.faces[ 4 ].color.initial : '-' ) +
-			( this.faces[ 5 ].color ? this.faces[ 5 ].color.initial : '-' );
-
+		(this.faces[0].color ? this.faces[0].color.initial : '-') +
+		(this.faces[1].color ? this.faces[1].color.initial : '-') +
+		(this.faces[2].color ? this.faces[2].color.initial : '-') +
+		(this.faces[3].color ? this.faces[3].color.initial : '-') +
+		(this.faces[4].color ? this.faces[4].color.initial : '-') +
+		(this.faces[5].color ? this.faces[5].color.initial : '-');
 
 
 
@@ -296,7 +289,7 @@ ERNO.Cubelet = function( cube, id, colors ){
 	// this.right.element.style.transform = 	"rotateY(  90deg ) translateZ( "+faceSpacing+"px ) rotateZ(   0deg )";
 	// this.down.element.style.transform = 	"rotateX( -90deg ) translateZ( "+faceSpacing+"px ) rotateZ(  90deg )";
 	// this.left.element.style.transform = 	"rotateY( -90deg ) translateZ( "+faceSpacing+"px ) rotateZ( -90deg )";
-	// this.back.element.style.transform = 	"rotateY( 180deg ) translateZ( "+faceSpacing+"px ) rotateZ( -90deg )";	
+	// this.back.element.style.transform = 	"rotateY( 180deg ) translateZ( "+faceSpacing+"px ) rotateZ( -90deg )";
 
 	// this.front.element.style.OTransform = this.front.element.style.MozTransform = 	this.front.element.style.WebkitTransform 	= this.front.element.style.transform;
 	// this.up.element.style.OTransform 	= this.up.element.style.MozTransform = 		this.up.element.style.WebkitTransform 		= this.up.element.style.transform;
@@ -309,13 +302,14 @@ ERNO.Cubelet = function( cube, id, colors ){
 	//  If this happens to be our logo-bearing Cubelet
 	//  we had better attach the logo to it!
 
-	this.isStickerCubelet = this.front.color && this.front.color.name === 'white' && this.type === 'center' 
+	this.isStickerCubelet = this.front.color && this.front.color.name ===
+		'madison' && this.type === 'center'
 
 
 
 	//  We need to know if we're "engaged" on an axis 
 	//  which at first seems indentical to isTweening,
-	//  until you consider partial rotations. 
+	//  until you consider partial rotations.
 
 	this.isTweening = true;
 	this.isEngagedX = false;
@@ -335,8 +329,8 @@ ERNO.Cubelet = function( cube, id, colors ){
 	// this.hideWireframes();
 
 
-	//  During a rotation animation this Cubelet marks itself as 
-	//  this.isTweening = true. 
+	//  During a rotation animation this Cubelet marks itself as
+	//  this.isTweening = true.
 	//  Very useful. Let's try it out.
 
 	this.isTweening = false;
@@ -345,35 +339,32 @@ ERNO.Cubelet = function( cube, id, colors ){
 	//  Some fun tweenable properties.
 
 	this.opacity = 1;
-	this.radius  = 0;
+	this.radius = 0;
 }
-
-
-
 
 
 
 //  Let's add some functionality to Cubelet's prototype
 //  By adding to Cubelet's prototype and not the Cubelet constructor
 //  we're keeping instances of Cubelet super clean and light.
-ERNO.Cubelet.prototype = Object.create( THREE.Object3D.prototype );
+ERNO.Cubelet.prototype = Object.create(THREE.Object3D.prototype);
 
-ERNO.extend( ERNO.Cubelet.prototype, {
+ERNO.extend(ERNO.Cubelet.prototype, {
 
 
-	//  Aside from initialization this function will be called 
+	//  Aside from initialization this function will be called
 	//  by the Cube during remapping.
 	//  The raw address is an integer from 0 through 26
 	//  mapped to the Cube in the same fashion as this.id.
 	//  The X, Y, and Z components each range from -1 through +1
 	//  where (0, 0, 0) is the Cube's core.
 
-	setAddress: function( address ){
+	setAddress: function(address) {
 
-		this.address  = address || 0
-		this.addressX = address.modulo( 3 ).subtract( 1 )
-		this.addressY = address.modulo( 9 ).divide( 3 ).roundDown().subtract( 1 ) * -1
-		this.addressZ = address.divide( 9 ).roundDown().subtract( 1 ) * -1
+		this.address = address || 0
+		this.addressX = address.modulo(3).subtract(1)
+		this.addressY = address.modulo(9).divide(3).roundDown().subtract(1) * -1
+		this.addressZ = address.divide(9).roundDown().subtract(1) * -1
 	},
 
 
@@ -381,22 +372,23 @@ ERNO.extend( ERNO.Cubelet.prototype, {
 	//  If so, return a String decribing what face that color is on.
 	//  Otherwise return false.
 
-	hasColor: function( color ){
+	hasColor: function(color) {
 
-		var i, face, faceColorRGB, 
-			colorRGB = _.hexToRgb( color.hex );
-		
-		for( i = 0; i < 6; i ++ ){
+		var i, face, faceColorRGB,
+			colorRGB = _.hexToRgb(color.hex);
 
-			faceColorRGB = _.hexToRgb( this.faces[ i ].color.hex );
+		for (i = 0; i < 6; i++) {
 
-			if( faceColorRGB.r === colorRGB.r && faceColorRGB.g === colorRGB.g && faceColorRGB.b === colorRGB.b ){
-				
+			faceColorRGB = _.hexToRgb(this.faces[i].color.hex);
+
+			if (faceColorRGB.r === colorRGB.r && faceColorRGB.g === colorRGB.g &&
+				faceColorRGB.b === colorRGB.b) {
+
 				face = i;
 				break
 			}
 		}
-		if( face !== undefined ){
+		if (face !== undefined) {
 
 			return [
 
@@ -407,7 +399,7 @@ ERNO.extend( ERNO.Cubelet.prototype, {
 				'left',
 				'back'
 
-			][ face ];
+			][face];
 		}
 		else return false;
 	},
@@ -416,26 +408,26 @@ ERNO.extend( ERNO.Cubelet.prototype, {
 	//  Similar to above, but accepts an arbitrary number of colors.
 	//  This function implies AND rather than OR, XOR, etc.
 
-	hasColors: function(){
+	hasColors: function() {
 
-		var 
-		cubelet = this,
-		result  = true,
-		colors  = Array.prototype.slice.call( arguments )
-		
-		colors.forEach( function( color ){
+		var
+			cubelet = this,
+			result = true,
+			colors = Array.prototype.slice.call(arguments)
 
-			result = result && !!cubelet.hasColor( color )
+		colors.forEach(function(color) {
+
+			result = result && !!cubelet.hasColor(color)
 		})
 		return result
 	},
 
 
-	getRadius: function(){
+	getRadius: function() {
 
 		return this.radius
 	},
-	setRadius: function( radius, onComplete ){
+	setRadius: function(radius, onComplete) {
 
 
 		//  @@
@@ -448,11 +440,11 @@ ERNO.extend( ERNO.Cubelet.prototype, {
 		//  may cause only 4 corners instead of 6 to setRadius()
 		//  because one side is probably engaged in a twist tween.
 
-		if( this.isTweening === false ){
+		if (this.isTweening === false) {
 
 			radius = radius || 0
-			if( this.radius === undefined ) this.radius = 0
-			if( this.radius !== radius ){
+			if (this.radius === undefined) this.radius = 0
+			if (this.radius !== radius) {
 
 
 				//  Here's some extra cuteness to make the tween's duration
@@ -462,37 +454,45 @@ ERNO.extend( ERNO.Cubelet.prototype, {
 
 				this.isTweening = true;
 
-				var tweenDuration = ( this.radius - radius ).absolute(),
-					obj = {radius:this.radius};
+				var tweenDuration = (this.radius - radius).absolute(),
+					obj = {
+						radius: this.radius
+					};
 
 
 
-				new TWEEN.Tween( obj )
-				.to( { radius: radius }, tweenDuration )
-				.easing( TWEEN.Easing.Quartic.Out )
-				.onUpdate( function(){
+				new TWEEN.Tween(obj)
+					.to({
+						radius: radius
+					}, tweenDuration)
+					.easing(TWEEN.Easing.Quartic.Out)
+					.onUpdate(function() {
 
-					this.position.set( this.addressX.multiply( this.size + obj.radius  ) + 0.2, this.addressY.multiply( this.size + obj.radius  ) + 0.2, this.addressZ.multiply( this.size + obj.radius  ) + 0.2 )
-					this.updateMatrix();
-					this.matrixSlice.copy( this.matrix );
+						this.position.set(this.addressX.multiply(this.size + obj.radius) +
+							0.2, this.addressY.multiply(this.size + obj.radius) + 0.2, this.addressZ
+							.multiply(this.size + obj.radius) + 0.2)
+						this.updateMatrix();
+						this.matrixSlice.copy(this.matrix);
 
-					this.radius = obj.radius;
+						this.radius = obj.radius;
 
-				}.bind( this ))
-				.onComplete( function(){
+					}.bind(this))
+					.onComplete(function() {
 
-					this.isTweening = false
+						this.isTweening = false
 
-					this.position.set( this.addressX.multiply( this.size + obj.radius  ) + 0.2, this.addressY.multiply( this.size + obj.radius  ) + 0.2, this.addressZ.multiply( this.size + obj.radius  ) + 0.2 )
-					this.updateMatrix();
-					this.matrixSlice.copy( this.matrix );
+						this.position.set(this.addressX.multiply(this.size + obj.radius) +
+							0.2, this.addressY.multiply(this.size + obj.radius) + 0.2, this.addressZ
+							.multiply(this.size + obj.radius) + 0.2)
+						this.updateMatrix();
+						this.matrixSlice.copy(this.matrix);
 
-					this.radius = obj.radius;
+						this.radius = obj.radius;
 
-					if( onComplete instanceof Function ) onComplete()
+						if (onComplete instanceof Function) onComplete()
 
-				}.bind( this ))
-				.start( this.cube.time );
+					}.bind(this))
+					.start(this.cube.time);
 
 			}
 		}
