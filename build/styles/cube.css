@@ -131,12 +131,14 @@
 
 */
 .purty .face { opacity: 0.5; }
-.purty .face.faceFront { background-color: #FFF; }
-.purty .face.faceUp    { background-color: #E87000; }
-.purty .face.faceRight { background-color: #3D81F6; }
-.purty .face.faceDown  { background-color: #DC422F; }
-.purty .face.faceLeft  { background-color: #009D54; }
-.purty .face.faceBack  { background-color: #F5B400; }
+.purty .face.faceFront { background-color: #0A2463
+; }
+.purty .face.faceUp    { background-color: #0A2463
+; }
+.purty .face.faceRight { background-color: #138A36; }
+.purty .face.faceDown  { background-color: #138A36; }
+.purty .face.faceLeft  { background-color: #B33F62; }
+.purty .face.faceBack  { background-color: #B33F62; }
 /*.purty .face.faceFront { background-color: #CCC; }
 .purty .face.faceUp    { background-color: #C30; }
 .purty .face.faceRight { background-color: #00A; }
@@ -199,17 +201,16 @@
 
 }
 
-
-.cube .sticker.red 		{ background: #DC422F;	}
-.cube .sticker.white 	{ background: #F3F3F3;	}
-.cube .sticker.blue 	{ background: #3D81F6; 	}
-.cube .sticker.green 	{ background: #009D54;	}
-.cube .sticker.orange 	{ background: #E87000; 	}
-.cube .sticker.yellow 	{ background: #F5B400; 	}
+.cube .sticker.white 	{ background: #0A2463;  }
+.cube .sticker.orange 	{ background: #0A2463; 	}
+.cube .sticker.blue 	{ background: #138A36; 	}
+.cube .sticker.red 		{ background: #138A36;	}
+.cube .sticker.green 	{ background: #B33F62;	}
+.cube .sticker.yellow 	{ background: #B33F62; 	}
 
 .cube .sticker.stickerLogo {
 
-	background: #F3F3F3 url( "../media/rubiksLogoClassic.png" );
+	background: #0A2463 url( "../media/rubiksLogoClassic.png" );
 	background-size: 100% 100%;
 	background-repeat: none;
 }
