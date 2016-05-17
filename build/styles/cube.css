@@ -131,10 +131,8 @@
 
 */
 .purty .face { opacity: 0.5; }
-.purty .face.faceFront { background-color: #0A2463
-; }
-.purty .face.faceUp    { background-color: #0A2463
-; }
+.purty .face.faceFront { background-color: #0A2463; }
+.purty .face.faceUp    { background-color: #0A2463; }
 .purty .face.faceRight { background-color: #138A36; }
 .purty .face.faceDown  { background-color: #138A36; }
 .purty .face.faceLeft  { background-color: #B33F62; }
