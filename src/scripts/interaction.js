@@ -13,7 +13,6 @@
 
 
 */
-
 ERNO.Interaction = (function() {
 
 	return function(cube, camera, domElement, dragSpeed, multiDrag) {
@@ -149,7 +148,6 @@ ERNO.Interaction = (function() {
 
 				projector.getIntersectionOnPlane(camera, x, y, plane, pointOnPlane);
 
-
 				direction.subVectors(pointOnPlane, intersection);
 
 
@@ -250,13 +248,16 @@ ERNO.Interaction = (function() {
 						//	Now we know the point of intersection, we can figure out what the associated cubelet is ...
 
 						cubelet = projector.getCubeletAtIntersection(intersection);
-						console.log(cubelet);
-
-
+						//console.log(pointOnPlane);
+						//console.log($(".cubeletId-" + cubelet.id + " >.id"));
+						$(".cubeletId-" + cubelet.id + " .axisZ>div.id").text("X");
+						$(".cubeletId-" + cubelet.id + " .axisZ>div.id").css("display",
+							"block");
 
 						//	... and the possible slices that might be rotated. Remeber, we can only figure out the exact slice once a drag happens.
 						possibleSlices = [cube.slices[cubelet.addressX + 1], cube.slices[
 							cubelet.addressY + 4], cube.slices[cubelet.addressZ + 7]];
+						console.log(possibleSlices);
 
 
 						//	Add a listener for interaction in the entire document.

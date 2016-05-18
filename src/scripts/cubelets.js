@@ -125,7 +125,7 @@ ERNO.Cubelet = function(cube, id, colors) {
 	//  Here's our overhead for that:
 
 	var extrovertedFaces = 0;
-	if (colors === undefined) colors = [W, O, , , G, ];
+	if (colors === undefined) colors = [M, J, , , B, ];
 	this.faces = [];
 
 
@@ -307,7 +307,7 @@ ERNO.Cubelet = function(cube, id, colors) {
 
 
 
-	//  We need to know if we're "engaged" on an axis 
+	//  We need to know if we're "engaged" on an axis
 	//  which at first seems indentical to isTweening,
 	//  until you consider partial rotations.
 

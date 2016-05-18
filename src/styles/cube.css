@@ -4,7 +4,6 @@
 /*          */
 /************/
 
-
 .cube {
 width:  100%;
 height: 100%;
@@ -196,7 +195,6 @@ height: 100%;
 background-color: #F0F;
 border-radius: 0.1em;
 text-align: center;
-
 }
 
 .cube .sticker.madison 	{ background: #0A2463;  }

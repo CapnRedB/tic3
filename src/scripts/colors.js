@@ -42,7 +42,7 @@ M = ERNO.MADISON = new ERNO.Color(
 		'M',
 		'#0A2463',
 		'font-weight: bold; color: #0A2463',
-		'background-color: #0A2463; color: rgba( 10, 36, 99, 0.5 )'
+		'background-color: #0A2463; color: rgba( 0, 0, 0, 0.5 )'
 	),
 	J = ERNO.JEWEL = new ERNO.Color(
 
