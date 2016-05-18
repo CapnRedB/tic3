@@ -250,14 +250,49 @@ ERNO.Interaction = (function() {
 						cubelet = projector.getCubeletAtIntersection(intersection);
 						//console.log(pointOnPlane);
 						//console.log($(".cubeletId-" + cubelet.id + " >.id"));
-						$(".cubeletId-" + cubelet.id + " .axisZ>div.id").text("X");
-						$(".cubeletId-" + cubelet.id + " .axisZ>div.id").css("display",
-							"block");
+						var rotationArray = [];
+						var a = $(".cubeletId-" + cubelet.id)[0].style.MozTransform;
+						console.log(a);
+						//Gets how the cube has been rotated when you click it
+						for (var i = 0; i < 3; i++) {
+							rotationArray.push(parseFloat(a.substr(a.search("rotate" + String.fromCharCode(
+								"X".charCodeAt() + i)) + 8, 5)));
+						}
+						console.log(rotationArray);
+						/*	var b = $(".cubeletId-" + cubelet.id)[0].style.MozTransform
+								.substr(a + 8, 5);
+							rotationArray.push(parseFloat(b));
+							a = $(".cubeletId-" + cubelet.id)[0].style.MozTransform
+								.indexOf("rotateY");
+							b = $(".cubeletId-" + cubelet.id)[0].style.MozTransform
+								.substr(a + 8, 5);
+							rotationArray.push(parseFloat(b));
+							a = $(".cubeletId-" + cubelet.id)[0].style.MozTransform
+								.indexOf("rotateZ");
+							b = $(".cubeletId-" + cubelet.id)[0].style.MozTransform
+								.substr(a + 8, 5);
+							rotationArray.push(parseFloat(b));
+							console.log(rotationArray);*/
+						if (projector.getFaceNormalForIntersection(intersection, null).z === 1) {
+							$(".cubeletId-" + cubelet.id + " .axisZ>div.id").text("Z");
+							$(".cubeletId-" + cubelet.id + " .axisZ>div.id").css("display",
+								"block");
+						}
+						if (projector.getFaceNormalForIntersection(intersection, null).x === 1) {
+							$(".cubeletId-" + cubelet.id + " .axisX>div.id").text("X");
+							$(".cubeletId-" + cubelet.id + " .axisX>div.id").css("display",
+								"block");
+						}
+						if (projector.getFaceNormalForIntersection(intersection, null).y === 1) {
+							$(".cubeletId-" + cubelet.id + " .axisY>div.id").text("Y");
+							$(".cubeletId-" + cubelet.id + " .axisY>div.id").css("display",
+								"block");
+						}
 
 						//	... and the possible slices that might be rotated. Remeber, we can only figure out the exact slice once a drag happens.
 						possibleSlices = [cube.slices[cubelet.addressX + 1], cube.slices[
 							cubelet.addressY + 4], cube.slices[cubelet.addressZ + 7]];
-						console.log(possibleSlices);
+
 
 
 						//	Add a listener for interaction in the entire document.
@@ -384,7 +419,8 @@ ERNO.Interaction = (function() {
 		}
 
 		domElement.addEventListener('mousedown', onInteractStart);
-		domElement.addEventListener('touchstart', onInteractStart);
+		domElement.addEventListener(
+			'touchstart', onInteractStart);
 
 
 		// CLICK DETECTION
