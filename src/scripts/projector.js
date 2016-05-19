@@ -139,7 +139,7 @@ ERNO.Projector = (function() {
 				.set(Math.round(target.x), Math.round(target.y), Math.round(target.z))
 				.multiplyScalar(2 / cube.size)
 				.set(target.x | 0, target.y | 0, target.z | 0);
-			console.log(target);
+			//console.log(target);
 			return normal;
 
 

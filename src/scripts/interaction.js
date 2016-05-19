@@ -246,19 +246,24 @@ ERNO.Interaction = (function() {
 
 
 						//	Now we know the point of intersection, we can figure out what the associated cubelet is ...
-
+						//console.log(projector.getIntersection(camera, mouseX, mouseY,
+						//intersection, plane));
 						cubelet = projector.getCubeletAtIntersection(intersection);
 						//console.log(pointOnPlane);
 						//console.log($(".cubeletId-" + cubelet.id + " >.id"));
+						//console.log(cubelet.rotation);
+						var rotationIndex = 0;
 						var rotationArray = [];
 						var a = $(".cubeletId-" + cubelet.id)[0].style.MozTransform;
-						console.log(a);
+						//console.log(a);
 						//Gets how the cube has been rotated when you click it
 						for (var i = 0; i < 3; i++) {
 							rotationArray.push(parseFloat(a.substr(a.search("rotate" + String.fromCharCode(
 								"X".charCodeAt() + i)) + 8, 5)));
+							rotationIndex += Math.round(rotationArray[i] * (i + 100));
 						}
-						console.log(rotationArray);
+
+						//console.log(rotationArray);
 						/*	var b = $(".cubeletId-" + cubelet.id)[0].style.MozTransform
 								.substr(a + 8, 5);
 							rotationArray.push(parseFloat(b));
@@ -271,22 +276,71 @@ ERNO.Interaction = (function() {
 								.indexOf("rotateZ");
 							b = $(".cubeletId-" + cubelet.id)[0].style.MozTransform
 								.substr(a + 8, 5);
-							rotationArray.push(parseFloat(b));
-							console.log(rotationArray);*/
-						if (projector.getFaceNormalForIntersection(intersection, null).z === 1) {
-							$(".cubeletId-" + cubelet.id + " .axisZ>div.id").text("Z");
-							$(".cubeletId-" + cubelet.id + " .axisZ>div.id").css("display",
-								"block");
+							rotationArray.push(parseFloat(b));*/
+						console.log(rotationArray);
+						console.log(rotationIndex);
+
+						//console.log(projector.getFaceNormalForIntersection(intersection, null));
+						//console.log("here we go");
+						//console.log(cubelet);
+						//this checks what face we are clicking on.
+						//console.log(cubelet.addressX + " " + cubelet.addressY + " " + cubelet.addressZ);
+						//console.log(cubelet.address)
+						if (projector.getFaceNormalForIntersection(intersection, null).z ===
+							1) {
+							if (Math.abs(rotationArray[2]) === 1.57) {
+								$(".cubeletId-" + cubelet.id + " .axisX>div.id").text("X");
+								$(".cubeletId-" + cubelet.id + " .axisX>div.id").css("display",
+									"block");
+
+							}
+							//console.log(Math.abs(rotationArray[1].toFixed(1)));
+							if (Math.abs(rotationArray[1].toFixed(1)) === 0.8) {
+								$(".cubeletId-" + cubelet.id + " .axisZ>div.id").text("Z");
+								$(".cubeletId-" + cubelet.id + " .axisZ>div.id").css("display",
+									"block");
+
+
+							}
+							if (Math.abs(rotationArray[2]) === 3.14 || Math.abs(rotationArray[2]) ===
+								0) {
+								$(".cubeletId-" + cubelet.id + " .axisY>div.id").text("Y");
+								$(".cubeletId-" + cubelet.id + " .axisY>div.id").css("display",
+									"block");
+
+							}
+
 						}
-						if (projector.getFaceNormalForIntersection(intersection, null).x === 1) {
+						if (projector.getFaceNormalForIntersection(intersection, null).x ===
+							1) {
 							$(".cubeletId-" + cubelet.id + " .axisX>div.id").text("X");
 							$(".cubeletId-" + cubelet.id + " .axisX>div.id").css("display",
 								"block");
 						}
-						if (projector.getFaceNormalForIntersection(intersection, null).y === 1) {
-							$(".cubeletId-" + cubelet.id + " .axisY>div.id").text("Y");
-							$(".cubeletId-" + cubelet.id + " .axisY>div.id").css("display",
-								"block");
+						if (projector.getFaceNormalForIntersection(intersection, null).y ===
+							1) {
+							//console.log(Math.round(Math.abs(rotationArray[1]));
+							if (Math.abs(rotationArray[2]) === 1.57) {
+								$(".cubeletId-" + cubelet.id + " .axisX>div.id").text("X");
+								$(".cubeletId-" + cubelet.id + " .axisX>div.id").css("display",
+									"block");
+
+							}
+							if (Math.round(Math.abs(rotationArray[1])) === 0) {
+								$(".cubeletId-" + cubelet.id + " .axisZ>div.id").text("Z");
+								$(".cubeletId-" + cubelet.id + " .axisZ>div.id").css("display",
+									"block");
+
+
+							}
+							if (Math.abs(rotationArray[2]) === 3.14 || Math.abs(rotationArray[2]) ===
+								0) {
+								$(".cubeletId-" + cubelet.id + " .axisY>div.id").text("Y");
+								$(".cubeletId-" + cubelet.id + " .axisY>div.id").css("display",
+									"block");
+
+							}
+
 						}
 
 						//	... and the possible slices that might be rotated. Remeber, we can only figure out the exact slice once a drag happens.
@@ -297,18 +351,22 @@ ERNO.Interaction = (function() {
 
 						//	Add a listener for interaction in the entire document.
 						domElement.addEventListener('mousemove', onInteractUpdate);
-						domElement.addEventListener('touchmove', onInteractUpdate);
+						domElement
+							.addEventListener('touchmove', onInteractUpdate);
 
 
 						//	Add a lister to detect the end of interaction, remember this could happen outside the domElement, but still within the document
 						domElement.addEventListener('mouseup', onInteractEnd);
-						domElement.addEventListener('touchcancel', onInteractEnd);
-						domElement.addEventListener('touchend', onInteractEnd);
+						domElement.addEventListener(
+							'touchcancel', onInteractEnd);
+						domElement.addEventListener(
+							'touchend', onInteractEnd);
 
 
 						//	Whilst interacting we can temporarily remove the listeners detecting the start of interaction
 						domElement.removeEventListener('mousedown', onInteractStart);
-						domElement.removeEventListener('touchstart', onInteractStart);
+						domElement
+							.removeEventListener('touchstart', onInteractStart);
 
 					}
 
@@ -380,7 +438,8 @@ ERNO.Interaction = (function() {
 				if (velocityOfInteraction > 0.3) {
 
 					targetAngle = Math.floor(angle / Math.PI * 0.5 * 4.0) * Math.PI * 0.5
-					targetAngle += cross.dot(direction.normalize()) > 0 ? Math.PI * 0.5 : 0;
+					targetAngle += cross.dot(direction.normalize()) > 0 ? Math.PI * 0.5 :
+						0;
 
 				}
 
