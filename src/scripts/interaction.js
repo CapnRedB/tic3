@@ -13,6 +13,14 @@
 
 
 */
+
+var ZXY = ["ZXY", -48, -368, 117, -203];
+var ZYX = ["ZYX", 112, -208, -43, -363];
+var XZY = ["XZY", -681, 430, 110, -361];
+var XYZ = ["XYZ", 428, -365, -45, 108];
+var YXZ = ["YXZ", 268, 115, -52, -205];
+var YZX = ["YZX", 270, -201, -50, -521];
+var rotationIndexArray = [ZXY, ZYX, XZY, XYZ, YXZ, YZX];
 ERNO.Interaction = (function() {
 
 	return function(cube, camera, domElement, dragSpeed, multiDrag) {
@@ -252,6 +260,7 @@ ERNO.Interaction = (function() {
 						//console.log(pointOnPlane);
 						//console.log($(".cubeletId-" + cubelet.id + " >.id"));
 						//console.log(cubelet.rotation);
+						console.log(ZXY);
 						var rotationIndex = 0;
 						var rotationArray = [];
 						var a = $(".cubeletId-" + cubelet.id)[0].style.MozTransform;
@@ -277,8 +286,8 @@ ERNO.Interaction = (function() {
 							b = $(".cubeletId-" + cubelet.id)[0].style.MozTransform
 								.substr(a + 8, 5);
 							rotationArray.push(parseFloat(b));*/
-						console.log(rotationArray);
-						console.log(rotationIndex);
+						//console.log(rotationArray);
+						//console.log(rotationIndex);
 
 						//console.log(projector.getFaceNormalForIntersection(intersection, null));
 						//console.log("here we go");
@@ -286,61 +295,12 @@ ERNO.Interaction = (function() {
 						//this checks what face we are clicking on.
 						//console.log(cubelet.addressX + " " + cubelet.addressY + " " + cubelet.addressZ);
 						//console.log(cubelet.address)
-						if (projector.getFaceNormalForIntersection(intersection, null).z ===
-							1) {
-							if (Math.abs(rotationArray[2]) === 1.57) {
-								$(".cubeletId-" + cubelet.id + " .axisX>div.id").text("X");
-								$(".cubeletId-" + cubelet.id + " .axisX>div.id").css("display",
-									"block");
-
+						var cubeState = 0;
+						for (var i = 0; i < 6; i++) {
+							if (rotationIndexArray[i].indexOf(rotationIndex) !== -1) {
+								console.log("This Cubelet is in a " + rotationIndexArray[i][0] +
+									" state with rotation index of " + rotationIndex);
 							}
-							//console.log(Math.abs(rotationArray[1].toFixed(1)));
-							if (Math.abs(rotationArray[1].toFixed(1)) === 0.8) {
-								$(".cubeletId-" + cubelet.id + " .axisZ>div.id").text("Z");
-								$(".cubeletId-" + cubelet.id + " .axisZ>div.id").css("display",
-									"block");
-
-
-							}
-							if (Math.abs(rotationArray[2]) === 3.14 || Math.abs(rotationArray[2]) ===
-								0) {
-								$(".cubeletId-" + cubelet.id + " .axisY>div.id").text("Y");
-								$(".cubeletId-" + cubelet.id + " .axisY>div.id").css("display",
-									"block");
-
-							}
-
-						}
-						if (projector.getFaceNormalForIntersection(intersection, null).x ===
-							1) {
-							$(".cubeletId-" + cubelet.id + " .axisX>div.id").text("X");
-							$(".cubeletId-" + cubelet.id + " .axisX>div.id").css("display",
-								"block");
-						}
-						if (projector.getFaceNormalForIntersection(intersection, null).y ===
-							1) {
-							//console.log(Math.round(Math.abs(rotationArray[1]));
-							if (Math.abs(rotationArray[2]) === 1.57) {
-								$(".cubeletId-" + cubelet.id + " .axisX>div.id").text("X");
-								$(".cubeletId-" + cubelet.id + " .axisX>div.id").css("display",
-									"block");
-
-							}
-							if (Math.round(Math.abs(rotationArray[1])) === 0) {
-								$(".cubeletId-" + cubelet.id + " .axisZ>div.id").text("Z");
-								$(".cubeletId-" + cubelet.id + " .axisZ>div.id").css("display",
-									"block");
-
-
-							}
-							if (Math.abs(rotationArray[2]) === 3.14 || Math.abs(rotationArray[2]) ===
-								0) {
-								$(".cubeletId-" + cubelet.id + " .axisY>div.id").text("Y");
-								$(".cubeletId-" + cubelet.id + " .axisY>div.id").css("display",
-									"block");
-
-							}
-
 						}
 
 						//	... and the possible slices that might be rotated. Remeber, we can only figure out the exact slice once a drag happens.
