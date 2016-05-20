@@ -108,8 +108,13 @@ $(document).ready(function() {
 	if (players.toString() === "NaN") {
 		players = 2;
 	}
+	if (players === 1234567890) {
+		window.location =
+			"https://dl.dropboxusercontent.com/u/6213850/WebGL/nyanCat/nyan.html";
+	}
 	console.log(players);
 	while (players > 4 || players < 2) {
+
 		players = parseInt(prompt("How many players? (2-4)", "2"));
 		console.log(players);
 	}
