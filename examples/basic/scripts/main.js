@@ -74,10 +74,9 @@
 */
 
 
-
+var players;
 $(document).ready(function() {
-	var players = 2;
-	var playerTurn = 0;
+
 
 	var useLockedControls = true,
 		controls = useLockedControls ? ERNO.Locked : ERNO.Freeform;
@@ -105,6 +104,11 @@ $(document).ready(function() {
 		cube.rotation.z += fixedOrientation.z;
 	}
 	cube.shuffle();
+	players = parseInt(prompt("How many players?", "2"));
+	while (players > 4 || players < 2) {
+		players = parseInt(prompt("How many players? (2-4)", "2"));
+	}
+	alert("Press H at anytime for help");
 
 
 	// The deviceMotion function provide some subtle mouse based motion

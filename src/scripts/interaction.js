@@ -14,7 +14,6 @@
 
 */
 var playerTurn = 0;
-var players = 4;
 var ZXY = ["ZXY", -48, -368, 117, -203];
 var ZYX = ["ZYX", 112, -208, -43, -363];
 var XZY = ["XZY", -681, 430, 110, -361];
@@ -316,6 +315,7 @@ ERNO.Interaction = (function() {
 								color = "#D6FFF6";
 								break;
 						}
+						console.log(players);
 						playerTurn++;
 						if (playerTurn === players) {
 							playerTurn = 0;
