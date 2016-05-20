@@ -53,7 +53,6 @@
 
 ERNO.Cubelet = function(cube, id, colors) {
 
-
 	THREE.Object3D.call(this);
 
 

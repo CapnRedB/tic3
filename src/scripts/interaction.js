@@ -13,7 +13,8 @@
 
 
 */
-
+var playerTurn = 0;
+var players = 4;
 var ZXY = ["ZXY", -48, -368, 117, -203];
 var ZYX = ["ZYX", 112, -208, -43, -363];
 var XZY = ["XZY", -681, 430, 110, -361];
@@ -260,7 +261,7 @@ ERNO.Interaction = (function() {
 						//console.log(pointOnPlane);
 						//console.log($(".cubeletId-" + cubelet.id + " >.id"));
 						//console.log(cubelet.rotation);
-						console.log(ZXY);
+						//console.log(ZXY);
 						var rotationIndex = 0;
 						var rotationArray = [];
 						var a = $(".cubeletId-" + cubelet.id)[0].style.MozTransform;
@@ -295,13 +296,107 @@ ERNO.Interaction = (function() {
 						//this checks what face we are clicking on.
 						//console.log(cubelet.addressX + " " + cubelet.addressY + " " + cubelet.addressZ);
 						//console.log(cubelet.address)
-						var cubeState = 0;
+						var marker = "";
+						var color = "";
+						switch (playerTurn) {
+							case 0:
+								marker = "X";
+								color = "#F0A202";
+								break;
+							case 1:
+								marker = "O";
+								color = "#0EAFFA";
+								break;
+							case 2:
+								marker = "△"
+								color = "#71F79F";
+								break;
+							case 3:
+								marker = "☆";
+								color = "#D6FFF6";
+								break;
+						}
+						playerTurn++;
+						if (playerTurn === players) {
+							playerTurn = 0;
+						}
+						var faceState = 0;
 						for (var i = 0; i < 6; i++) {
 							if (rotationIndexArray[i].indexOf(rotationIndex) !== -1) {
+								faceState = i;
 								console.log("This Cubelet is in a " + rotationIndexArray[i][0] +
 									" state with rotation index of " + rotationIndex);
 							}
 						}
+						$(".cubeletId-" + cubelet.id + " .id").css(
+							"color", color);
+						if (projector.getFaceNormalForIntersection(intersection).x === 1) {
+							if (faceState === 0 || faceState === 4) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").text(marker);
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"display", "block");
+								console.log("placed");
+							}
+							if (faceState === 1 || faceState === 3) {
+								$(".cubeletId-" + cubelet.id + " >.axisY .id").text(marker);
+								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
+									"display", "block");
+								console.log("placed");
+							}
+							if (faceState === 2 || faceState === 5) {
+								$(".cubeletId-" + cubelet.id + " >.axisZ .id").text(marker);
+								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
+									"display", "block");
+								console.log("placed");
+							}
+						}
+
+						if (projector.getFaceNormalForIntersection(intersection).y === 1) {
+							if (faceState === 1 || faceState === 5) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").text(marker);
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"display", "block");
+								console.log("placed");
+							}
+							if (faceState === 0 || faceState === 2) {
+								$(".cubeletId-" + cubelet.id + " >.axisY .id").text(marker);
+								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
+									"display", "block");
+								console.log("placed");
+							}
+							if (faceState === 3 || faceState === 4) {
+								$(".cubeletId-" + cubelet.id + " >.axisZ .id").text(marker);
+								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
+									"display", "block");
+								console.log("placed");
+							}
+
+						}
+
+						if (projector.getFaceNormalForIntersection(intersection).z === 1) {
+							if (faceState === 2 || faceState === 3) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").text(marker);
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"display", "block");
+								console.log("placed");
+							}
+							if (faceState === 4 || faceState === 5) {
+								$(".cubeletId-" + cubelet.id + " >.axisY .id").text(marker);
+								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
+									"display", "block");
+								console.log("placed");
+							}
+							if (faceState === 0 || faceState === 1) {
+								$(".cubeletId-" + cubelet.id + " >.axisZ .id").text(marker);
+								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
+									"display", "block");
+								console.log("placed");
+							}
+						}
+
+
+						//console.log("Clicked on the X face");
+
 
 						//	... and the possible slices that might be rotated. Remeber, we can only figure out the exact slice once a drag happens.
 						possibleSlices = [cube.slices[cubelet.addressX + 1], cube.slices[

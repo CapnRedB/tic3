@@ -76,7 +76,8 @@
 
 
 $(document).ready(function() {
-
+	var players = 2;
+	var playerTurn = 0;
 
 	var useLockedControls = true,
 		controls = useLockedControls ? ERNO.Locked : ERNO.Freeform;
@@ -103,6 +104,7 @@ $(document).ready(function() {
 		cube.rotation.y += fixedOrientation.y;
 		cube.rotation.z += fixedOrientation.z;
 	}
+	cube.shuffle();
 
 
 	// The deviceMotion function provide some subtle mouse based motion
