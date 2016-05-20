@@ -339,7 +339,7 @@ ERNO.Interaction = (function() {
 								console.log("placed");
 							}
 							if (faceState === 1 || faceState === 3) {
-								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
 									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
@@ -347,7 +347,7 @@ ERNO.Interaction = (function() {
 								console.log("placed");
 							}
 							if (faceState === 2 || faceState === 5) {
-								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
 									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
@@ -366,7 +366,7 @@ ERNO.Interaction = (function() {
 								console.log("placed");
 							}
 							if (faceState === 0 || faceState === 2) {
-								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
 									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
@@ -374,7 +374,7 @@ ERNO.Interaction = (function() {
 								console.log("placed");
 							}
 							if (faceState === 3 || faceState === 4) {
-								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
 									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
@@ -394,7 +394,7 @@ ERNO.Interaction = (function() {
 								console.log("placed");
 							}
 							if (faceState === 4 || faceState === 5) {
-								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
 									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
@@ -402,7 +402,7 @@ ERNO.Interaction = (function() {
 								console.log("placed");
 							}
 							if (faceState === 0 || faceState === 1) {
-								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
 									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
