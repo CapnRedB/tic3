@@ -105,12 +105,15 @@ $(document).ready(function() {
 	}
 	cube.shuffle();
 	players = parseInt(prompt("How many players?", "2"));
-	while (players > 4 || players < 2) {
-		players = parseInt(prompt("How many players? (2-4)", "2"));
-	}
-	if (players === null || players === undefined || players === NaN) {
+	if (players.toString() === "NaN") {
 		players = 2;
 	}
+	console.log(players);
+	while (players > 4 || players < 2) {
+		players = parseInt(prompt("How many players? (2-4)", "2"));
+		console.log(players);
+	}
+
 	alert("Press H at anytime for help");
 
 
