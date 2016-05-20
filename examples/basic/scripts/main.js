@@ -110,7 +110,7 @@ $(document).ready(function() {
 	}
 	if (players === 1234567890) {
 		window.location =
-			"https://dl.dropboxusercontent.com/u/6213850/WebGL/nyanCat/nyan.html";
+			"http://hellorun.helloenjoy.com/";
 	}
 	console.log(players);
 	while (players > 4 || players < 2) {
