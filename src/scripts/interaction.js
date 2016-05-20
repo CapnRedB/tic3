@@ -328,22 +328,27 @@ ERNO.Interaction = (function() {
 									" state with rotation index of " + rotationIndex);
 							}
 						}
-						$(".cubeletId-" + cubelet.id + " .id").css(
-							"color", color);
+
 						if (projector.getFaceNormalForIntersection(intersection).x === 1) {
 							if (faceState === 0 || faceState === 4) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisX .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
 									"display", "block");
 								console.log("placed");
 							}
 							if (faceState === 1 || faceState === 3) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
 									"display", "block");
 								console.log("placed");
 							}
 							if (faceState === 2 || faceState === 5) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
 									"display", "block");
@@ -353,18 +358,24 @@ ERNO.Interaction = (function() {
 
 						if (projector.getFaceNormalForIntersection(intersection).y === 1) {
 							if (faceState === 1 || faceState === 5) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisX .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
 									"display", "block");
 								console.log("placed");
 							}
 							if (faceState === 0 || faceState === 2) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
 									"display", "block");
 								console.log("placed");
 							}
 							if (faceState === 3 || faceState === 4) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
 									"display", "block");
@@ -375,18 +386,24 @@ ERNO.Interaction = (function() {
 
 						if (projector.getFaceNormalForIntersection(intersection).z === 1) {
 							if (faceState === 2 || faceState === 3) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisX .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
 									"display", "block");
 								console.log("placed");
 							}
 							if (faceState === 4 || faceState === 5) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisY .id").css(
 									"display", "block");
 								console.log("placed");
 							}
 							if (faceState === 0 || faceState === 1) {
+								$(".cubeletId-" + cubelet.id + " >.axisX .id").css(
+									"color", color);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").text(marker);
 								$(".cubeletId-" + cubelet.id + " >.axisZ .id").css(
 									"display", "block");
