@@ -108,6 +108,9 @@ $(document).ready(function() {
 	while (players > 4 || players < 2) {
 		players = parseInt(prompt("How many players? (2-4)", "2"));
 	}
+	if (players === null || players === undefined || players === NaN) {
+		players = 2;
+	}
 	alert("Press H at anytime for help");
 
 

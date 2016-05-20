@@ -566,8 +566,10 @@ ERNO.Cube = function(parameters) {
 			event.target.tagName.toLowerCase() !== 'textarea' &&
 			!this.mouseInteraction.active &&
 			this.keyboardControlsEnabled) {
-			if (String.fromCharCode(event.which) === 'q') {
-				alert('Pressed q');
+			if (String.fromCharCode(event.which) === 'h') {
+				alert(
+					'Try to get three in a row or complete a face of the cube, Press x y z to rotate the whole cube r m l u e d f s b to rotate the slices'
+				);
 			}
 			var key = String.fromCharCode(event.which);
 			if ('XxRrMmLlYyUuEeDdZzFfSsBb'.indexOf(key) >= 0) this.twist(key);
